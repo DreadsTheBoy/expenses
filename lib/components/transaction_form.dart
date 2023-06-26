@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 
 class TransactionForm extends StatelessWidget {
@@ -11,6 +9,16 @@ class TransactionForm extends StatelessWidget {
 
   //Functions
   final void Function(String, double) onSubmit;
+  _submitForm() {
+    final title = titleController.text;
+    final value = double.tryParse(valueController.text) ?? 0.0;
+
+    if ((title.isEmpty) || (value <= 0)) {
+      return;
+    }
+
+    onSubmit(title, value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +30,22 @@ class TransactionForm extends StatelessWidget {
           children: <Widget>[
             TextField(
               decoration: const InputDecoration(labelText: 'Titulo'),
+              onSubmitted: (_) => _submitForm(),
               controller: titleController,
             ),
             TextField(
               decoration: const InputDecoration(labelText: 'Valor (R\$)'),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              onSubmitted: (_) => _submitForm(),
               controller: valueController,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {
-                    final title = titleController.text;
-                    final value = double.tryParse(valueController.text) ?? 0.0;
-                    onSubmit(title, value);
-                  },
+                  onPressed: _submitForm,
                   child: const Text(
                     'Nova Transação',
                     style: TextStyle(color: Colors.purple),
