@@ -6,8 +6,10 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
-  const TransactionList({super.key, required this.transactions});
+  const TransactionList(
+      {super.key, required this.transactions, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class TransactionList extends StatelessWidget {
                   'Nenhuma Transação Cadastrada!',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
+                    fontSize: 20,
                   ),
                 ),
                 const SizedBox(
@@ -55,7 +58,7 @@ class TransactionList extends StatelessWidget {
                         padding: const EdgeInsets.all(6),
                         child: FittedBox(
                           child: Text(
-                            'R\$${tr.value}',
+                            'R\$${tr.value.toStringAsFixed(2)}',
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -74,6 +77,13 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat('dd/MMM/y').format(tr.date),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () => onRemove(tr.id),
+                      color: Colors.red,
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
                     ),
                   ),
                 );
