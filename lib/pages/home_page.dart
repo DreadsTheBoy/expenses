@@ -22,21 +22,33 @@ class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
     Transaction(
       id: 't0',
-      title: 'Conta #0',
+      title: 'Padaria',
       value: 40.66,
       date: DateTime.now().subtract(const Duration(days: 33)),
     ),
     Transaction(
       id: 't1',
-      title: 'Conta #1',
+      title: 'Cartão de Crédito',
       value: 875.66,
       date: DateTime.now().subtract(const Duration(days: 3)),
     ),
     Transaction(
       id: 't2',
-      title: 'Conta #2',
+      title: 'Internet',
       value: 139.90,
       date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Camisa Nike',
+      value: 200.64,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Almoço',
+      value: 29.90,
+      date: DateTime.now(),
     ),
   ];
 
