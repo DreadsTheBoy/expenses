@@ -50,69 +50,76 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(labelText: 'Titulo'),
-              onSubmitted: (_) => _submitForm(),
-              controller: _titleController,
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Valor (R\$)'),
-              keyboardType: const TextInputType.numberWithOptions(
-                decimal: true,
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                decoration: const InputDecoration(labelText: 'Titulo'),
+                onSubmitted: (_) => _submitForm(),
+                controller: _titleController,
               ),
-              onSubmitted: (_) => _submitForm(),
-              controller: _valueController,
-            ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      // ignore: unnecessary_null_comparison
-                      _selectedDate == null
-                          ? 'Nenhuma data Selecionada!'
-                          : 'Data Selecionada ${DateFormat('dd/MM/y').format(_selectedDate!)}',
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _showDatePicker,
-                    child: Text(
-                      _selectedDate == null
-                          ? 'Selecionar data'
-                          : 'Alterar data',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+              TextField(
+                decoration: const InputDecoration(labelText: 'Valor (R\$)'),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                onSubmitted: (_) => _submitForm(),
+                controller: _valueController,
+              ),
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        // ignore: unnecessary_null_comparison
+                        _selectedDate == null
+                            ? 'Nenhuma data Selecionada!'
+                            : 'Data Selecionada ${DateFormat('dd/MM/y').format(_selectedDate!)}',
                       ),
                     ),
-                  )
+                    TextButton(
+                      onPressed: _showDatePicker,
+                      child: Text(
+                        _selectedDate == null
+                            ? 'Selecionar data'
+                            : 'Alterar data',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: TextButton(
+                      onPressed: _submitForm,
+                      child: const Text(
+                        'Nova Transação',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  color: Theme.of(context).colorScheme.primary,
-                  child: TextButton(
-                    onPressed: _submitForm,
-                    child: const Text(
-                      'Nova Transação',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

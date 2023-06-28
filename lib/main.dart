@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
 //Pages
 import 'pages/home_page.dart';
@@ -11,6 +12,9 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData tema = ThemeData();
+    // SystemChrome.setPreferredOrientations(
+    //   [DeviceOrientation.portraitUp],
+    // );
     return MaterialApp(
       home: const HomePage(),
       theme: tema.copyWith(
